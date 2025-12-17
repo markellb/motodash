@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:segment_display/segment_display.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'widgets/vertical_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -210,158 +211,213 @@ class _MyHomePageState extends State<MyHomePage> {
       onKeyEvent: _handleKeyEvent,
       autofocus: true,
       child: Container(
+        height: 700,
+        width: 700,
         color: Colors.black,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Transform(
-                    transform: Matrix4.skewX(-0.2),
-                    alignment: Alignment.center,
-                    child: SevenSegmentDisplay(
-                      value: _counter.toString(),
-                      segmentStyle: HexSegmentStyle(
-                        disabledColor: Colors.greenAccent.withOpacity(0.1),
-                        enabledColor: Colors.green,
-                        segmentBaseSize: const Size(1.0, 2.0),
-                        segmentSpacing: 1.0,
+              SizedBox(
+                width: 700,
+                height: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 60,
+                      height: 200,
+                      child: VerticalBar(
+                        minValue: 0,
+                        maxValue: 255,
+                        currentValue: _counter.toDouble(),
+                        activeColor: Colors.green,
+                        inactiveColor: Colors.grey.withOpacity(0.3),
+                        segmentCount: 20,
+                        segmentHeight: 6.0,
+                        segmentWidth: 30.0,
+                        segmentSpacing: 2.0,
+                        isLeft: true,
+                        curveRadius: 60.0,
                       ),
-                      backgroundColor: Colors.transparent,
-                      characterCount: 3,
-                      size: 20,
                     ),
-                  ),
-                  const SizedBox(width: 30),
-                  Transform(
-                    transform: Matrix4.skewX(-0.2),
-                    alignment: Alignment.center,
-                    child: FourteenSegmentDisplay(
-                      value: 'km/h',
-                      segmentStyle: HexSegmentStyle(
-                        disabledColor: Colors.greenAccent.withOpacity(0.1),
-                        enabledColor: Colors.green,
-                        //segmentBaseSize: const Size(1.0, 2.0),
-                      ),
-                      backgroundColor: Colors.transparent,
-                      //characterCount: 5,
-                      size: 8,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 40),
-              /*if (_lastCanMessage != null) ...[
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[900],
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: _isConnected ? Colors.green : Colors.red,
-                      width: 2,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            _isConnected ? Icons.check_circle : Icons.error,
-                            color: _isConnected ? Colors.green : Colors.red,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            _isConnected ? 'Conectado' : 'Desconectado',
-                            style: TextStyle(
-                              color: _isConnected ? Colors.green : Colors.red,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                    const SizedBox(width: 0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Transform(
+                          transform: Matrix4.skewX(-0.2),
+                          alignment: Alignment.center,
+                          child: SevenSegmentDisplay(
+                            value: _counter.toString(),
+                            segmentStyle: HexSegmentStyle(
+                              disabledColor: Colors.greenAccent.withOpacity(
+                                0.1,
+                              ),
+                              enabledColor: Colors.green,
+                              segmentBaseSize: const Size(1.0, 2.0),
+                              segmentSpacing: 1.0,
                             ),
+                            backgroundColor: Colors.transparent,
+                            characterCount: 3,
+                            size: 20,
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      _buildCanInfoRow(
-                        'ID',
-                        '0x${_lastCanMessage!.id.toRadixString(16).toUpperCase().padLeft(3, '0')}',
-                      ),
-                      _buildCanInfoRow(
-                        'Extended',
-                        _lastCanMessage!.isExtended ? 'Sí' : 'No',
-                      ),
-                      _buildCanInfoRow('DLC', '${_lastCanMessage!.dlc}'),
-                      _buildCanInfoRow('Data', _lastCanMessage!.dataHex),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Timestamp: ${_lastCanMessage!.timestamp}',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 10,
                         ),
+                        const SizedBox(width: 30),
+                        Transform(
+                          transform: Matrix4.skewX(-0.2),
+                          alignment: Alignment.center,
+                          child: FourteenSegmentDisplay(
+                            value: 'km/h',
+                            segmentStyle: HexSegmentStyle(
+                              disabledColor: Colors.greenAccent.withOpacity(
+                                0.1,
+                              ),
+                              enabledColor: Colors.green,
+                              //segmentBaseSize: const Size(1.0, 2.0),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            //characterCount: 5,
+                            size: 8,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 00),
+                    SizedBox(
+                      width: 60,
+                      height: 200,
+                      child: VerticalBar(
+                        minValue: 0,
+                        maxValue: 255,
+                        currentValue: _counter.toDouble(),
+                        activeColor: Colors.green,
+                        inactiveColor: Colors.grey.withOpacity(0.3),
+                        segmentCount: 20,
+                        segmentHeight: 6.0,
+                        segmentWidth: 30.0,
+                        segmentSpacing: 2.0,
+                        isLeft: false,
+                        curveRadius: 60.0,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ] else ...[
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[900],
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.orange, width: 2),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.hourglass_empty,
-                        color: Colors.orange,
-                        size: 16,
+              ),
+              //const SizedBox(height: 20),
+              SizedBox(
+                width: 700,
+                height: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /*Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Power: ${_counter} kW',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      SizedBox(width: 8),
-                      Text(
-                        'Esperando mensajes CAN...',
-                        style: TextStyle(color: Colors.orange, fontSize: 12),
+                    ),*/
+                    Row(
+                      children: [
+                        Transform(
+                          transform: Matrix4.skewX(-0.2),
+                          alignment: Alignment.center,
+                          child: SevenSegmentDisplay(
+                            value: _counter.toString(),
+                            segmentStyle: HexSegmentStyle(
+                              disabledColor: Colors.greenAccent.withOpacity(0.1),
+                              enabledColor: Colors.green,
+                              //segmentBaseSize: const Size(1.0, 2.0),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            //characterCountr: 5,
+                            size: 3,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Transform(
+                          transform: Matrix4.skewX(-0.2),
+                          alignment: Alignment.center,
+                          child: SixteenSegmentDisplay(
+                            value: 'kW',
+                            segmentStyle: DefaultSegmentStyle(
+                              disabledColor: Colors.greenAccent.withOpacity(0.1),
+                              enabledColor: Colors.green,
+                              //segmentBaseSize: const Size(1.0, 2.0),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            //characterCountr: 5,
+                            size: 5,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Spacer(),
+                    Transform(
+                      transform: Matrix4.skewX(-0.2),
+                      alignment: Alignment.center,
+                      child: SevenSegmentDisplay(
+                        value: _counter.toString(),
+                        segmentStyle: HexSegmentStyle(
+                          disabledColor: Colors.greenAccent.withOpacity(0.1),
+                          enabledColor: Colors.green,
+                          //segmentBaseSize: const Size(1.0, 2.0),
+                        ),
+                        backgroundColor: Colors.transparent,
+                        //characterCountr: 5,
+                        size: 5,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: 10),
+                    Transform(
+                      transform: Matrix4.skewX(-0.2),
+                      alignment: Alignment.center,
+                      child: SixteenSegmentDisplay(
+                        value: '%',
+                        segmentStyle: DefaultSegmentStyle(
+                          disabledColor: Colors.greenAccent.withOpacity(0.1),
+                          enabledColor: Colors.green,
+                          //segmentBaseSize: const Size(1.0, 2.0),
+                        ),
+                        backgroundColor: Colors.transparent,
+                        //characterCountr: 5,
+                        size: 3,
+                      ),
+                    ),
+                    
+                    Spacer(),
+                    Transform(
+                      transform: Matrix4.skewX(-0.2),
+                      alignment: Alignment.center,
+                      child: SevenSegmentDisplay(
+                        value: _counter.toString(),
+                        segmentStyle: HexSegmentStyle(
+                          disabledColor: Colors.greenAccent.withOpacity(0.1),
+                          enabledColor: Colors.green,
+                          //segmentBaseSize: const Size(1.0, 2.0),
+                        ),
+                        backgroundColor: Colors.transparent,
+                        //characterCountr: 5,
+                        size: 3,
+                      ),
+                    ),
+                  ],
                 ),
-              ],*/
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCanInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '$label:',
-            style: const TextStyle(color: Colors.grey, fontSize: 12),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              color: Colors.greenAccent,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }
