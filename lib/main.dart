@@ -392,7 +392,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         backgroundColor: Colors.transparent,
                         //characterCountr: 5,
-                        size: 3,
+                        size: 4,
                       ),
                     ),
                     
